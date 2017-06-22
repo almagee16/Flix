@@ -9,14 +9,14 @@
 import UIKit
 import AlamofireImage
 
-class NowPlayingViewController: UIViewController, UITableViewDataSource {
+class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var tableView: UITableView!
     
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
-    
     
     
     override func viewDidLoad() {
@@ -31,6 +31,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
     }
     
     func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        self.activityIndicator.startAnimating()
         fetchMovies()
     }
     
@@ -51,6 +52,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
                 self.movies = movies
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
+                self.activityIndicator.stopAnimating()
             }
         }
         task.resume()

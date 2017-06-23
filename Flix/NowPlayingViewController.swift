@@ -12,6 +12,8 @@ import AlamofireImage
 class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let alertController = UIAlertController(title: "Network Error", message: "Please Try again", preferredStyle: .actionSheet)
+   
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -25,6 +27,12 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrol
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) {(action) in
+            self.fetchMovies()
+        }
+        // add the OK action to the alert controller
+        self.alertController.addAction(OKAction)
         
         tableView.dataSource = self
         fetchMovies()
@@ -45,7 +53,8 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrol
         let task = session.dataTask(with: request) { (data, response, error) in
             // This will run when the network request returns
             if let error = error {
-                print (error.localizedDescription)
+                self.networkError()
+                
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
@@ -90,6 +99,17 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrol
             detailViewController.movie = movie
         }
     }
+    
+    func networkError() {
+        print ("stuff gets here")
+       
+        self.present(self.alertController, animated: true) {
+            // optional code for what happens after the alert controller has finished presenting
+            
+        }
+    }
+    
+    
     
     
     

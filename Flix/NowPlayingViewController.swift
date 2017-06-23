@@ -73,9 +73,10 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrol
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        
         let movie = movies[indexPath.row]
         let title = movie["title"] as! String
+        
+        print ("table view " + title)
         let overview = movie["overview"] as! String
         
         cell.titleLabel.text = title

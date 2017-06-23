@@ -101,11 +101,8 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrol
     }
     
     func networkError() {
-        print ("stuff gets here")
-       
         self.present(self.alertController, animated: true) {
             // optional code for what happens after the alert controller has finished presenting
-            
         }
     }
     

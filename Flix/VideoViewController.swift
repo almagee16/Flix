@@ -12,10 +12,11 @@ class VideoViewController: UIViewController {
 
     @IBOutlet weak var videoView: UIWebView!
     var videoURL = ""
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.activityIndicator.startAnimating()
         // Do any additional setup after loading the view.
         // Convert the url String to a NSURL object.
         let requestURL = URL(string:videoURL)!
@@ -23,6 +24,7 @@ class VideoViewController: UIViewController {
         let request = URLRequest(url: requestURL)
         // Load Request into WebView.
         videoView.loadRequest(request)
+        self.activityIndicator.stopAnimating()
     }
 
     override func didReceiveMemoryWarning() {

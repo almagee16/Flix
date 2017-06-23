@@ -20,7 +20,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UIScrol
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

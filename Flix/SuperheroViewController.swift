@@ -58,8 +58,6 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         let cell = superheroCollectionView.dequeueReusableCell(withReuseIdentifier: "SuperheroCollectionViewCell", for: indexPath) as! SuperheroCollectionViewCell
         
         let movie = movies[indexPath.row]
-        //let title = movie["title"] as! String
-        //let overview = movie["overview"] as! String
         
         let posterPathString = movie["poster_path"] as! String
         let baseURLString = "https://image.tmdb.org/t/p/w500"
